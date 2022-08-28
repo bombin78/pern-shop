@@ -3,6 +3,7 @@
         "consts",
         "fileupload",
         "hstore",
-        "pern"
+        "pern",
+        "PERNSHOP"
     ]
 }

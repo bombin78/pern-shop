@@ -1,4 +1,6 @@
 import React 					from 'react';
+import { useContext } 			from 'react';
+import { Context } 				from '..';
 import { useRoutes } 			from 'react-router-dom';
 import { Navigate } 			from 'react-router-dom';
 import { ADMIN_ROUTE } 			from "../utils/consts";
@@ -15,7 +17,7 @@ import DevicePage 				from "../pages/DevicePage";
 
 
 const AppRouter = () => {
-	const isAuth = false;
+	const { user } = useContext(Context);
 
 	const authRouters = useRoutes([
 		{
@@ -52,7 +54,7 @@ const AppRouter = () => {
 
 	return (
 		<>
-			{ isAuth && authRouters }
+			{ user.isAuth && authRouters }
 			{ publicRouters }
 		</>
 	);
