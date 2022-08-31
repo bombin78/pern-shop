@@ -1,7 +1,7 @@
 import React 					from 'react';
 import { useContext } 			from 'react';
 import { Context } 				from '..';
-import { useRoutes } 			from 'react-router-dom';
+import { Route, Routes, useRoutes } 			from 'react-router-dom';
 import { Navigate } 			from 'react-router-dom';
 import { ADMIN_ROUTE } 			from "../utils/consts";
 import { BASKET_ROUTE } 		from "../utils/consts";
@@ -14,12 +14,13 @@ import Basket 					from "../pages/Basket";
 import Auth 					from "../pages/Auth";
 import Shop						from "../pages/Shop";
 import DevicePage 				from "../pages/DevicePage";
+import {observer} 				from "mobx-react-lite";
 
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
 	const { user } = useContext(Context);
 
-	const authRouters = useRoutes([
+	const authRouters = [
 		{
 			path: ADMIN_ROUTE,
 			element: <Admin />,
@@ -28,9 +29,9 @@ const AppRouter = () => {
 			path: BASKET_ROUTE,
 			element: <Basket />,
 		},
-	]);
+	];
 
-	const publicRouters = useRoutes([
+	const publicRouters = [
 		{
 			path: LOGIN_ROUTE,
 			element: <Auth />,
@@ -50,14 +51,18 @@ const AppRouter = () => {
 			path: '/*',
 			element: <Navigate replace to={ SHOP_ROUTE } />,
 		},
-	]);
+	];
 
 	return (
-		<>
-			{ user.isAuth && authRouters }
-			{ publicRouters }
-		</>
+		<Routes>
+			{ user.isAuth && authRouters.map(({ path, element }) =>
+				<Route key={path} path={path} element={element} />
+			)}
+			{ publicRouters.map(({ path, element }) =>
+				<Route key={path} path={path} element={element} />
+			)}
+		</Routes>
 	);
-};
+});
 
 export default AppRouter;

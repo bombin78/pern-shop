@@ -6,10 +6,14 @@ export default class DeviceStore {
 		this._types = [
 			{id: 1, name: 'Холодильник'},
 			{id: 2, name: 'Смартфоны'},
+			{id: 3, name: 'Ноутбуки'},
+			{id: 4, name: 'Телевизоры'},
 		];
 		this._brands = [
-			{id: 1, name: 'Холодильник'},
-			{id: 2, name: 'Смартфоны'},
+			{id: 1, name: 'Samsung'},
+			{id: 2, name: 'Apple'},
+			{id: 3, name: 'Lenovo'},
+			{id: 4, name: 'Aser'},
 		];
 		this._devices = [
 			{
@@ -17,23 +21,46 @@ export default class DeviceStore {
 				name: "13 pro",
 				price: 150000,
 				rating: 0,
-				img: "../../server/static/7f19b472-d3ae-4cd3-87eb-8e3cadea9985.jpg",
+				img: "",
 			},
 			{
 				id: 2,
 				name: "13 pro",
 				price: 150000,
-				rating: 0,
-				img: "../../server/static/7f19b472-d3ae-4cd3-87eb-8e3cadea9985.jpg",
+				rating: 3,
+				img: "",
 			},
 			{
 				id: 3,
 				name: "13 pro",
 				price: 150000,
-				rating: 0,
-				img: "../../server/static/7f19b472-d3ae-4cd3-87eb-8e3cadea9985.jpg",
+				rating: 5,
+				img: "",
+			},
+			{
+				id: 4,
+				name: "13 pro",
+				price: 150000,
+				rating: 5,
+				img: "",
+			},
+			{
+				id: 5,
+				name: "13 pro",
+				price: 150000,
+				rating: 5,
+				img: "",
+			},
+			{
+				id: 6,
+				name: "13 pro",
+				price: 150000,
+				rating: 5,
+				img: "",
 			},
 		];
+		this._selectedType = {};
+		this._selectedBrand = {};
 		makeAutoObservable(this);
 	}
 
@@ -41,23 +68,39 @@ export default class DeviceStore {
 		this._types = types;
 	}
 
-	setBrand(brand) {
-		this._brand = brand;
+	setBrands(brands) {
+		this._brands = brands;
 	}
 
 	setDevices(devices) {
-		this._device = devices;
+		this._devices = devices;
+	}
+
+	setSelectedType(type) {
+		this._selectedType = type;
+	}
+
+	setSelectedBrand(brand) {
+		this._selectedBrand = brand;
 	}
 
 	get  types() {
 		return this._types;
 	}
 
-	get brand() {
-		return this._brand;
+	get brands() {
+		return this._brands;
 	}
 
 	get devices() {
 		return this._devices;
+	}
+
+	get selectedType() {
+		return this._selectedType;
+	}
+
+	get selectedBrand() {
+		return this._selectedBrand;
 	}
 }
