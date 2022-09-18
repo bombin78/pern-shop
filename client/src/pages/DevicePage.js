@@ -1,23 +1,18 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { Container, Col, Image, Row, Card, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import bigStar from '../assets/bigStar.png';
+import { fetchOneDevice } from '../http/deviceApi';
 
 const DevicePage = () => {
-	const device = {
-		id: 1,
-		name: "13 pro",
-		price: 150000,
-		rating: 0,
-		img: "",
-	};
+	const [ device, setDevice ] = useState({info: []});
+	const { id } = useParams();
 
-	const descriptions = [
-		{id: 1, title: 'Оперативная память', description: '8 Гб'},
-		{id: 2, title: 'Камера', description: '12 Мп'},
-		{id: 3, title: 'Процессор', description: 'Core i5'},
-		{id: 4, title: 'Количество ядер', description: '4'},
-		{id: 5, title: 'Аккумулятор', description: '5000'},
-	];
+	useEffect(async () => {
+		const data = await fetchOneDevice(id);
+		setDevice(data);
+	}, []);
 
 	return (
 		<Container className='mt-3'>
@@ -26,7 +21,7 @@ const DevicePage = () => {
 					<Image
 						with='300'
 						height='300'
-						src={device.img}
+						src={process.env.REACT_APP_API_URL + device.img}
 					/>
 				</Col>
 				<Col md={4}>
@@ -65,7 +60,7 @@ const DevicePage = () => {
 			</Row>
 			<div className='d-flex flex-column m-3'>
 				<h1>Характеристики</h1>
-				{descriptions.map((item, idx) => 
+				{device.info.map((item, idx) => 
 					<Row 
 						key={item.id}
 						style={{
