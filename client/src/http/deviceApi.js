@@ -1,11 +1,17 @@
-import { baseUrl, authOptions, options } from '.';
+import { 
+	baseUrl,
+	authFormOptions,
+	authJSONOptions,
+	JSONOptions,
+} from '.';
+
 
 export const createType = async (type) => {
 	const url = baseUrl + 'api/type';
 
 	try {
 		const response = await fetch( url, {
-			...authOptions,
+			...authJSONOptions,
 			method: 'POST',
 			body: JSON.stringify(type),
 		});
@@ -22,7 +28,7 @@ export const fetchTypes = async () => {
 	const url = baseUrl + 'api/type';
 
 	try {
-		const response = await fetch(url, options);
+		const response = await fetch(url, JSONOptions);
 		if (!response.ok) {
 			throw new Error('Ответ сети был не ok.');
 		}
@@ -37,7 +43,7 @@ export const createBrand = async (brand) => {
 
 	try {
 		const response = await fetch( url, {
-			...authOptions,
+			...authJSONOptions,
 			method: 'POST',
 			body: JSON.stringify(brand),
 		});
@@ -54,7 +60,7 @@ export const fetchBrands = async () => {
 	const url = baseUrl + 'api/brand';
 
 	try {
-		const response = await fetch(url, options);
+		const response = await fetch(url, JSONOptions);
 		if (!response.ok) {
 			throw new Error('Ответ сети был не ok.');
 		}
@@ -69,9 +75,10 @@ export const createDevice = async (device) => {
 
 	try {
 		const response = await fetch( url, {
-			...authOptions,
+			...authFormOptions,
 			method: 'POST',
-			body: JSON.stringify(device),
+			// device - это объект FormData
+			body: device,
 		});
 		if (!response.ok) {
 			throw new Error('Ответ сети был не ok.');
@@ -86,7 +93,7 @@ export const fetchDevices = async () => {
 	const url = baseUrl + 'api/device';
 
 	try {
-		const response = await fetch(url, options);
+		const response = await fetch(url, JSONOptions);
 		if (!response.ok) {
 			throw new Error('Ответ сети был не ok.');
 		}
@@ -100,7 +107,7 @@ export const fetchOneDevice = async (id) => {
 	const url = baseUrl + 'api/device/' + id;
 
 	try {
-		const response = await fetch(url, options);
+		const response = await fetch(url, JSONOptions);
 		if (!response.ok) {
 			throw new Error('Ответ сети был не ok.');
 		}

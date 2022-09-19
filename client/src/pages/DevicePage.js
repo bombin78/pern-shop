@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Container, Col, Image, Row, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -9,9 +8,8 @@ const DevicePage = () => {
 	const [ device, setDevice ] = useState({info: []});
 	const { id } = useParams();
 
-	useEffect(async () => {
-		const data = await fetchOneDevice(id);
-		setDevice(data);
+	useEffect(() => {
+		fetchOneDevice(id).then((data) => setDevice(data));
 	}, []);
 
 	return (

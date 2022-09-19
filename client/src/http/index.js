@@ -20,14 +20,22 @@ const defaultOptions = {
 	// origin-when-cross-origin, unsafe-url.
 }
 
-export const authOptions = {
+export const authFormOptions = {
+	...defaultOptions,
+	headers: {
+		Authorization: `Bearer ${localStorage.getItem('token')}`,
+	},
+}
+
+export const authJSONOptions = {
 	...defaultOptions,
 	headers: {
 		'Content-Type': 'application/json',
 		Authorization: `Bearer ${localStorage.getItem('token')}`,
 	},
 }
-export const options = {
+
+export const JSONOptions = {
 	...defaultOptions,
 	headers: {
 		'Content-Type': 'application/json',

@@ -1,11 +1,16 @@
-import jwtDecode from 'jwt-decode';
-import { baseUrl, authOptions, options } from '.';
+import jwtDecode 		from 'jwt-decode';
+import {
+	baseUrl,
+	authJSONOptions,
+	JSONOptions,
+} 						from '.';
+
 
 export const registration = async (email, password) => {
 	const url = baseUrl + 'api/user/registration';
 	try {
 		const response = await fetch( url, {
-			...options,
+			...JSONOptions,
 			method: 'POST',
 			body: JSON.stringify({
 				email,
@@ -28,7 +33,7 @@ export const login = async (email, password) => {
 	const url = baseUrl + 'api/user/login';
 	try {
 		const response = await fetch( url, {
-			...options,
+			...JSONOptions,
 			method: 'POST',
 			body: JSON.stringify({
 				email,
@@ -49,7 +54,7 @@ export const login = async (email, password) => {
 export const check = async () => {
 	const url = baseUrl + 'api/user/auth/';
 	try {
-		const response = await fetch( url, authOptions);
+		const response = await fetch( url, authJSONOptions);
 		if (!response.ok) {
 			throw new Error('Ответ сети был не ok.');
 		}
