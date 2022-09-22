@@ -56,7 +56,7 @@ export const createBrand = async (brand) => {
 	}
 };
 
-export const fetchBrands = async () => {
+export const fetchBrands = async (typeId, brandId, page, limit = 5) => {
 	const url = baseUrl + 'api/brand';
 
 	try {
@@ -89,8 +89,23 @@ export const createDevice = async (device) => {
 	}
 };
 
-export const fetchDevices = async () => {
-	const url = baseUrl + 'api/device';
+export const fetchDevices = async (params) => {
+	let url = baseUrl + 'api/device';
+
+	if (params) {
+		url = Object
+			.entries(params)
+			.filter(([k, v]) => v || Number(v) === 0)
+			.reduce((a, [k, v]) => {
+				a += `&${k}=${v}`;
+				return a;
+			}, url)
+			// заменяем первый символ `&` на символ `?`
+			.replace('&', '?');
+	}
+
+	console.log('params', params);
+	console.log('url', url);
 
 	try {
 		const response = await fetch(url, JSONOptions);

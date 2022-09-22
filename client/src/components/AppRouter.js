@@ -1,20 +1,25 @@
 import React 					from 'react';
 import { useContext } 			from 'react';
+import {observer} 				from "mobx-react-lite";
+import { 
+	Route,
+	Routes,
+	Navigate
+}								from 'react-router-dom';
 import { Context } 				from '..';
-import { Route, Routes, useRoutes } 			from 'react-router-dom';
-import { Navigate } 			from 'react-router-dom';
-import { ADMIN_ROUTE } 			from "../utils/consts";
-import { BASKET_ROUTE } 		from "../utils/consts";
-import { LOGIN_ROUTE } 			from "../utils/consts";
-import { REGISTRATION_ROUTE } 	from "../utils/consts";
-import { SHOP_ROUTE } 			from "../utils/consts";
-import { DEVICE_ROUTE } 		from "../utils/consts";
+import { 
+	ADMIN_ROUTE,
+	BASKET_ROUTE,
+	DEVICE_ROUTE,
+	LOGIN_ROUTE,
+	REGISTRATION_ROUTE,
+	SHOP_ROUTE,
+} 								from "../utils/consts";
 import Admin 					from "../pages/Admin";
 import Basket 					from "../pages/Basket";
 import Auth 					from "../pages/Auth";
 import Shop						from "../pages/Shop";
 import DevicePage 				from "../pages/DevicePage";
-import {observer} 				from "mobx-react-lite";
 
 
 const AppRouter = observer(() => {
